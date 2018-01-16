@@ -23,6 +23,29 @@
         android:textColor="#000000"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/price_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quantity_text_view"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Price"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/price_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price_txt"
+        android:layout_marginLeft="16dp"
+        android:text="$0"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
