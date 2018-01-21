@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 2;
+    int price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -34,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
@@ -49,9 +50,24 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = (quantity * 5);
-        String priceMessage = "Total: $" + price + "\nThank you!";
-        displayMessage(priceMessage);
+        price = calculatePrice();
+        displayMessage(createOrderSummary(price));
+        //String priceMessage = "Total: $" + price + "\nThank you!";
+        //displayMessage(priceMessage);
+    }
+
+    /**
+     * Calculates the price of the order.
+     *
+     * @return total price
+     */
+    private int calculatePrice() {
+        price = quantity * 5;
+        return price;
+    }
+
+    private String createOrderSummary(int num) {
+        return "Name: Robert Rangel\nQuantity: " + quantity + "\nTotal: $" + price + "\nThank you!";
     }
 
     /**
