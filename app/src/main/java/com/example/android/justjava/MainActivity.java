@@ -4,6 +4,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
@@ -47,8 +48,11 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+
         int price = calculatePrice();
-        displayMessage(createOrderSummary(price));
+        displayMessage(createOrderSummary(price, hasWhippedCream));
     }
 
     /**
@@ -65,10 +69,11 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param price of the Order
      * @return Order Summary message
+     * @param addWhippedCream is wheather or not the user wants whipped cream topping
      *
      */
-    private String createOrderSummary(int price) {
-        return "Name: Robert Rangel\nQuantity: " + quantity +
+    private String createOrderSummary(int price, boolean addWhippedCream) {
+        return "Name: Robert Rangel\nAdd whipped cream? " + addWhippedCream + "\nQuantity: " + quantity +
                 "\nTotal: $" + price + "\nThank you!";
     }
 
