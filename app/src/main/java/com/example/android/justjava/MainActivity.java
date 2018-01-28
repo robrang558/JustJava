@@ -1,6 +1,8 @@
 package com.example.android.justjava;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -65,7 +67,15 @@ public class MainActivity extends AppCompatActivity {
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         boolean hasChocolate = chocolateCheckBox.isChecked();
         int price = calculatePrice(hasWhippedCream, hasChocolate);
-        displayMessage(createOrderSummary(name, price, hasWhippedCream, hasChocolate));
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:robrang558@hotmail.com")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + name);
+        intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(name, price, hasWhippedCream, hasChocolate));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
     }
 
     /**
@@ -101,12 +111,5 @@ public class MainActivity extends AppCompatActivity {
                 "\nQuantity: " + quantity + "\nTotal: $" + price + "\nThank you!";
     }
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
 
 }
